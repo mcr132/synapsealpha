@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "synpasealpha"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"value": ""
+		},
+		"synpasealpha-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adlsg2data.dfs.core.windows.net"
+		},
+		"covid-tracking_sasUri": {
+			"value": ""
+		},
+		"synpasealpha-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://adlsg2synapsealpha.dfs.core.windows.net"
+		}
+	}
+}
