@@ -1,0 +1,9 @@
+{
+	"name": "adfv2synapsealpha",
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "df2340cf-fec2-42d7-96db-751d7f4d71cc",
+		"tenantId": "bc3edec2-3266-4ce0-8084-27f9e85d788a"
+	}
+}
