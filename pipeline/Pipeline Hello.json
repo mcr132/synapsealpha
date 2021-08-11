@@ -1,0 +1,40 @@
+{
+	"name": "Pipeline Hello",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook 1",
+				"type": "SynapseNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebook": {
+						"referenceName": "Notebook 1",
+						"type": "NotebookReference"
+					},
+					"parameters": {
+						"a": {
+							"value": "Hello",
+							"type": "string"
+						},
+						"b": {
+							"value": "World",
+							"type": "string"
+						}
+					},
+					"snapshot": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-08-07T17:11:15Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

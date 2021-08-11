@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "-- This is auto-generated code\nwith cte_data as (\nSELECT *\nFROM\n    OPENROWSET(\n        BULK     'https://pandemicdatalake.blob.core.windows.net/public/curated/covid-19/covid_tracking/latest/covid_tracking.parquet',\n        FORMAT = 'parquet'\n    ) as [result] \n)\n\n    SELECT *\n    FROM cte_data\n    WHERE [State]  = 'WA' ;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "master"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
