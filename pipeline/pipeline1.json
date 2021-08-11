@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Stored procedure1",
+				"description": "exceute this sp",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [],
 				"policy": {
