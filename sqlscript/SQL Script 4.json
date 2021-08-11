@@ -1,5 +1,5 @@
 {
-	"name": "SQL script 3",
+	"name": "SQL script 4",
 	"properties": {
 		"content": {
 			"query": "CREATE PROC [dbo].[Procedure33]\nAS\nBEGIN\nSELECT * FROM Table33;\nEND\n",
