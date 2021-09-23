@@ -1,0 +1,136 @@
+{
+	"name": "TestParam",
+	"properties": {
+		"bigDataPool": {
+			"referenceName": "sparkalpha",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_spark",
+				"display_name": "Synapse Spark"
+			},
+			"language_info": {
+				"name": "scala"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/9b62f06d-0530-40ca-8e89-a65394bf1ed4/resourceGroups/synapsealpha/providers/Microsoft.Synapse/workspaces/synpasealpha/bigDataPools/sparkalpha",
+				"name": "sparkalpha",
+				"type": "Spark",
+				"endpoint": "https://synpasealpha.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkalpha",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 8,
+				"memory": 56
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"tags": [
+						"parameters"
+					]
+				},
+				"source": [
+					"val sch = \"data\"\r\n",
+					"val tbl = \"pub_acmg_ticket\"\r\n",
+					"val hash_key = \"hash_key\""
+				],
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"val account_name = \"adlsg2data\"\r\n",
+					"val container_name = s\"$sch\"   \r\n",
+					"val relative_path = s\"/$sch/$tbl\"\r\n",
+					"\r\n",
+					"val adls_path = s\"abfss://$container_name@$account_name.dfs.core.windows.net/$relative_path/\"\r\n",
+					"\r\n",
+					"//spark.conf.set(s\"fs.aure.account.auth.type.$account_name.dfs.core.windows.net\", \"\")  //shared key\r\n",
+					"//spark.conf.set(s\"fs.azure.account.key.$account_name.dfs.core.windows.net\", \"CWWjswLU4ycfj9opPo5xxvhtbz6beCYjkN81gCVNr/IO4XhPax8+cHYAH0YlzGii5NMG/qHCvPKvcTpmTBvJJg==\")  //ADLS gen2 Primary Key\r\n",
+					"println(adls_path)\r\n",
+					"println(relative_path)"
+				],
+				"execution_count": 6
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import spark.implicits._\r\n",
+					"\r\n",
+					"val columns = Seq(\"schema_name\", \"table_name\")\r\n",
+					"val data = Seq((s\"$sch\", s\"$tbl\"))\r\n",
+					"val rdd = spark.sparkContext.parallelize(data)\r\n",
+					"\r\n",
+					"val df = rdd.toDF()\r\n",
+					"df.rdd.getNumPartitions\r\n",
+					"\r\n",
+					"df.show()"
+				],
+				"execution_count": 7
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\r\n",
+					"df.write.mode(\"overwrite\").option(\"header\", true).csv(adls_path)"
+				],
+				"execution_count": 8
+			}
+		]
+	}
+}
