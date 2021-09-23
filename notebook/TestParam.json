@@ -76,7 +76,7 @@
 					"val container_name = s\"$sch\"   \r\n",
 					"val relative_path = s\"/$sch/$tbl\"\r\n",
 					"\r\n",
-					"val adls_path = s\"abfss://$container_name@$account_name.dfs.core.windows.net/$relative_path/\"\r\n",
+					"val adls_path = s\"abfss://$container_name@$account_name.dfs.core.windows.net$relative_path/\"\r\n",
 					"\r\n",
 					"//spark.conf.set(s\"fs.aure.account.auth.type.$account_name.dfs.core.windows.net\", \"\")  //shared key\r\n",
 					"//spark.conf.set(s\"fs.azure.account.key.$account_name.dfs.core.windows.net\", \"CWWjswLU4ycfj9opPo5xxvhtbz6beCYjkN81gCVNr/IO4XhPax8+cHYAH0YlzGii5NMG/qHCvPKvcTpmTBvJJg==\")  //ADLS gen2 Primary Key\r\n",
